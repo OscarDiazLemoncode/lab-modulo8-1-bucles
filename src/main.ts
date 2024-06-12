@@ -74,7 +74,7 @@ const pacientes: Pacientes[] = [
   },
 ];
 
-// Extraer la lista de paciente que están asignados a la especialidad de Pediatría
+// a) Extraer la lista de paciente que están asignados a la especialidad de Pediatría
 const obtenPacientesAsignadosAPediatria = (
   arrayPacientes: Pacientes[]
 ): Pacientes[] => {
@@ -93,12 +93,28 @@ const obtenPacientesAsignadosAPediatria = (
       : '';
     i++;
   } */
-
+  console.log('ficha asignados a pediatria');
+  console.table(fichaPediatra);
   return fichaPediatra;
 };
 
+// b) Extraer la lista de pacientes asignados a Pediatría y que tengan una edad menor de 10 años
+const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (
+  fichaPediatra: Pacientes[]
+): Pacientes[] => {
+  let fichaPediatraMenorDeDiezAnios: Pacientes[] = [];
+  for (let i = 0; i < fichaPediatra.length; i++) {
+    const el = fichaPediatra[i];
+    if (el.edad < 10) {
+      fichaPediatraMenorDeDiezAnios = [...fichaPediatraMenorDeDiezAnios, el];
+    }
+  }
+  console.log('ficha pediatria < 10 años');
+  console.table(fichaPediatraMenorDeDiezAnios);
+  return fichaPediatraMenorDeDiezAnios;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-  obtenPacientesAsignadosAPediatria(pacientes);
   const fichaPediatra = obtenPacientesAsignadosAPediatria(pacientes);
-  console.table(fichaPediatra);
+  obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(fichaPediatra);
 });

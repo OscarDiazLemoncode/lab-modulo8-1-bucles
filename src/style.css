@@ -28,7 +28,7 @@ a:hover {
 h1,
 h2,
 h3 {
-  color: #fff;
+  color: initial;
 }
 body {
   margin: 0;

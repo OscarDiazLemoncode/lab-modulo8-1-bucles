@@ -74,6 +74,8 @@ const pacientes: Pacientes[] = [
   },
 ];
 
+/* Apartado 1 */
+
 // a) Extraer la lista de paciente que están asignados a la especialidad de Pediatría
 const obtenPacientesAsignadosAPediatria = (
   arrayPacientes: Pacientes[]
@@ -85,6 +87,7 @@ const obtenPacientesAsignadosAPediatria = (
       ? (fichaPediatra = [...fichaPediatra, el])
       : '';
   }
+  // Con while
   /* let i = 0;
   while (i < arrayPacientes.length) {
     let el = arrayPacientes[i];
@@ -114,7 +117,22 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (
   return fichaPediatraMenorDeDiezAnios;
 };
 
+/* Apartado 2 */
+// Protocolo de urgencia
+const activarProtocoloUrgencia = (arrayPacientes: Pacientes[]): boolean => {
+  let activarProctolo = false;
+  for (let i = 0; i < arrayPacientes.length; i++) {
+    const el = arrayPacientes[i];
+    el.temperatura > 39.1 && el.frecuenciaCardiaca > 100
+      ? (activarProctolo = true)
+      : console.log('No se activa el protocolo de urgencia');
+  }
+  console.log(`activarProtocolo => ${activarProctolo}`);
+  return activarProctolo;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const fichaPediatra = obtenPacientesAsignadosAPediatria(pacientes);
   obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(fichaPediatra);
+  activarProtocoloUrgencia(pacientes);
 });

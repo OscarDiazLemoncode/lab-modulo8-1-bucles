@@ -81,21 +81,20 @@ const obtenPacientesAsignadosAPediatria = (
   arrayPacientes: Pacientes[]
 ): Pacientes[] => {
   let fichaPediatra: Pacientes[] = [];
-  for (let i = 0; i < arrayPacientes.length; i++) {
+  /* for (let i = 0; i < arrayPacientes.length; i++) {
     let el = arrayPacientes[i];
     el.especialidad === 'Pediatra'
       ? (fichaPediatra = [...fichaPediatra, el])
       : '';
-  }
-  // Con while
-  /* let i = 0;
+  } */
+  let i = 0;
   while (i < arrayPacientes.length) {
     let el = arrayPacientes[i];
     el.especialidad === 'Pediatra'
       ? (fichaPediatra = [...fichaPediatra, el])
       : '';
     i++;
-  } */
+  }
   console.log('ficha asignados a pediatria');
   console.table(fichaPediatra);
   return fichaPediatra;
@@ -121,11 +120,20 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (
 // Protocolo de urgencia
 const activarProtocoloUrgencia = (arrayPacientes: Pacientes[]): boolean => {
   let activarProctolo = false;
-  for (let i = 0; i < arrayPacientes.length; i++) {
+  // Con bucle for
+  /* for (let i = 0; i < arrayPacientes.length; i++) {
     const el = arrayPacientes[i];
     el.temperatura > 39.1 && el.frecuenciaCardiaca > 100
       ? (activarProctolo = true)
       : console.log('No se activa el protocolo de urgencia');
+  } */
+  let i = 0;
+  while (
+    i < arrayPacientes.length &&
+    arrayPacientes[i].temperatura > 39.1 &&
+    arrayPacientes[i].frecuenciaCardiaca > 100
+  ) {
+    activarProctolo = true;
   }
   console.log(`activarProtocolo => ${activarProctolo}`);
   return activarProctolo;

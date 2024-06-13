@@ -139,8 +139,27 @@ const activarProtocoloUrgencia = (arrayPacientes: Pacientes[]): boolean => {
   return activarProctolo;
 };
 
+/* Apartado 3 */
+const reasignaPacientesAMedicoFamilia = (
+  fichaPediatra: Pacientes[]
+): Pacientes[] => {
+  let fichaDePediatriaAMedicoDeFamilia: Pacientes[] = [];
+  for (let i = 0; i < fichaPediatra.length; i++) {
+    const el = fichaPediatra[i];
+    if (fichaPediatra) {
+      fichaDePediatriaAMedicoDeFamilia = [
+        ...fichaDePediatriaAMedicoDeFamilia,
+        { ...el, especialidad: 'Medico de familia' },
+      ];
+    }
+  }
+  console.table(fichaDePediatriaAMedicoDeFamilia);
+  return fichaDePediatriaAMedicoDeFamilia;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const fichaPediatra = obtenPacientesAsignadosAPediatria(pacientes);
   obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(fichaPediatra);
   activarProtocoloUrgencia(pacientes);
+  reasignaPacientesAMedicoFamilia(fichaPediatra);
 });

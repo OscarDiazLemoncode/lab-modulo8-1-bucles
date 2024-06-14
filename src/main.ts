@@ -95,7 +95,7 @@ const obtenPacientesAsignadosAPediatria = (
       : '';
     i++;
   }
-  console.log('ficha asignados a pediatria');
+  console.warn('ficha asignados a pediatria');
   console.table(fichaPediatra);
   return fichaPediatra;
 };
@@ -111,7 +111,7 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (
       fichaPediatraMenorDeDiezAnios = [...fichaPediatraMenorDeDiezAnios, el];
     }
   }
-  console.log('ficha pediatria < 10 años');
+  console.warn('ficha pediatria < 10 años');
   console.table(fichaPediatraMenorDeDiezAnios);
   return fichaPediatraMenorDeDiezAnios;
 };
@@ -135,7 +135,7 @@ const activarProtocoloUrgencia = (arrayPacientes: Pacientes[]): boolean => {
   ) {
     activarProctolo = true;
   }
-  console.log(`ACTIVAR PROTOCOLO DE URGENCIA => ${activarProctolo}`);
+  console.warn(`ACTIVAR PROTOCOLO DE URGENCIA => ${activarProctolo}`);
   return activarProctolo;
 };
 
@@ -157,7 +157,7 @@ const reasignaPacientesAMedicoFamilia = (
       );
     }
   }
-  console.log('Reasigna pacientes de Pediatria a Médico de familia');
+  console.warn('Reasigna pacientes de Pediatria a Médico de familia');
   console.table(fichaDePediatriaAMedicoDeFamilia);
   return fichaDePediatriaAMedicoDeFamilia;
 };
@@ -165,19 +165,34 @@ const reasignaPacientesAMedicoFamilia = (
 /* Apartado 4 */
 const hayPacientesDePediatria = (arrayPacientes: Pacientes[]): boolean => {
   let pacientesPediatria: boolean = false;
-  for (let i = 0; i < arrayPacientes.length; i++) {
+  let arrayPacientePediatria: Pacientes[] = [];
+  /* for (let i = 0; i < arrayPacientes.length; i++) {
     const el = arrayPacientes[i];
     if (el.especialidad === 'Pediatra') {
       pacientesPediatria = true;
-      console.log(`¿HAY PACIENTES DE PEDIATRIA? => ${pacientesPediatria}`);
-      console.log(`LOS PACIENTES DE PEDIATRIA SON:`);
-      console.table(el);
+      arrayPacientePediatria = [...arrayPacientePediatria, el];
     }
+  } */
+  let i = 0;
+  while (i < arrayPacientes.length) {
+    const el = arrayPacientes[i];
+    if (el.especialidad === 'Pediatra') {
+      pacientesPediatria = true;
+      arrayPacientePediatria = [...arrayPacientePediatria, el];
+    }
+    i++;
   }
+  console.warn(`¿HAY PACIENTES DE PEDIATRIA? => ${pacientesPediatria}`);
+  console.warn(`LOS PACIENTES DE PEDIATRIA SON:`);
+  console.table(arrayPacientePediatria);
   return pacientesPediatria;
 };
 
+/* Apartado 5 */
+
 document.addEventListener('DOMContentLoaded', () => {
+  console.warn('array original');
+  console.table(pacientes);
   const fichaPediatra = obtenPacientesAsignadosAPediatria(pacientes);
   obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(fichaPediatra);
   activarProtocoloUrgencia(pacientes);

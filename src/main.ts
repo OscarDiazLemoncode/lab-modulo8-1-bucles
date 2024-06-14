@@ -135,7 +135,7 @@ const activarProtocoloUrgencia = (arrayPacientes: Pacientes[]): boolean => {
   ) {
     activarProctolo = true;
   }
-  console.log(`activarProtocolo => ${activarProctolo}`);
+  console.log(`ACTIVAR PROTOCOLO DE URGENCIA => ${activarProctolo}`);
   return activarProctolo;
 };
 
@@ -151,10 +151,30 @@ const reasignaPacientesAMedicoFamilia = (
         ...fichaDePediatriaAMedicoDeFamilia,
         { ...el, especialidad: 'Medico de familia' },
       ];
+    } else {
+      console.error(
+        'No hay pacientes en Pediatria para asignarlos a Médico de familia'
+      );
     }
   }
+  console.log('Reasigna pacientes de Pediatria a Médico de familia');
   console.table(fichaDePediatriaAMedicoDeFamilia);
   return fichaDePediatriaAMedicoDeFamilia;
+};
+
+/* Apartado 4 */
+const hayPacientesDePediatria = (arrayPacientes: Pacientes[]): boolean => {
+  let pacientesPediatria: boolean = false;
+  for (let i = 0; i < arrayPacientes.length; i++) {
+    const el = arrayPacientes[i];
+    if (el.especialidad === 'Pediatra') {
+      pacientesPediatria = true;
+      console.log(`¿HAY PACIENTES DE PEDIATRIA? => ${pacientesPediatria}`);
+      console.log(`LOS PACIENTES DE PEDIATRIA SON:`);
+      console.table(el);
+    }
+  }
+  return pacientesPediatria;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -162,4 +182,5 @@ document.addEventListener('DOMContentLoaded', () => {
   obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(fichaPediatra);
   activarProtocoloUrgencia(pacientes);
   reasignaPacientesAMedicoFamilia(fichaPediatra);
+  hayPacientesDePediatria(pacientes);
 });
